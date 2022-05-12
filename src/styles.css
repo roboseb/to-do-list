@@ -1,39 +1,155 @@
+html {
+    --backdrop: #FFFFFF;
+    --primary: #D7CDCC;
+    --secondary: burlywood;
+    --accent: #9C528B;
+    --lightaccent: #c390b7;
+}
+
 body {
     margin: 0;
+}
+
+body {
+    cursor: url('/src/images/cursormain.png'), auto;
+}
+
+.mainclicked:not(button) {
+    animation: mainclick 3000s;
+    animation-iteration-count: infinite;
+}
+
+button {
+    cursor: url('/src/images/cursorlink.png'), auto;
+}
+
+button:active {
+    animation: linkclick 3000s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes linkclick {
+    from {cursor: url('/src/images/cursorlinkdown.png'), auto;}
+    to {cursor: url('/src/images/cursorlink.png'), auto;}
+}
+
+@keyframes mainclick {
+    from {cursor: url('/src/images/cursormaindown.png'), auto;}
+    to {cursor: url('/src/images/cursormain.png'), auto;}
 }
 
 #container {
     width: 100vw;
     height: 100vh;
     display: grid;
-    background-color: red;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr 6fr;
 }
 
 #header {
-    background-color: green;
+    background-color: var(--lightaccent);
     grid-column: span 2;
+    display: flex;
+    align-items: center;
+}
+
+#header>h1 {
+    margin: 20px;
 }
 
 #sidebar {
-    background-color: yellow;
+    background-color: var(--secondary);
 }
 
-#tasks {
-    background: blue;
+#taskcontainer {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    background-color: #555;
+    gap: 10px;
+    padding: 10px;
+}
+
+#tasks, #donetasks{
+    background: var(--backdrop);
+    display: flex;
+    flex-direction: column;
     padding: 15px 0px 15px 15px;
+    align-items: start;
+    border-radius: 12px;
+    transition: all 1s;
+}
+
+#donetasks {
+    background-color: var(--secondary);
+    flex-grow: 1;
+    
+}
+
+.task>.checkbtn {
+    background-color: var(--accent);
+    border-style: none;
+    border-radius: 100%;
+    height: 1rem;
+    width: 1rem;
+    transition: all 0.5s;
+    color: transparent;
+    position: relative;
+}
+
+.task>.checkbtn:hover {
+    background-color: var(--lightaccent);
+    border-color: var(--lightaccent);
+    color: var(--accent);
+}
+
+.task .checksymbol {
+    font-size: 1.3rem;
+    position: absolute;
+    left: 3px;
+    top: -5px;
+}
+
+button:not(.checkbtn) {
+    color: white;
+    background-color: var(--accent);
+    border-radius: 7px;
+    border-style: none;
+    
+    padding: 5px 10px 5px 10px;
+    transition: background-color 0.5s;
+
+    box-shadow: 0 9px #999;
+    margin-bottom: 9px;
+}
+
+button:not(.checkbtn):hover {
+    background-color: var(--lightaccent);
+}
+
+button:not(.checkbtn):active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 .task {
-    color: white;
-    width: 60%;
-    background-color: red;
+    background-color: var(--primary);
     padding: 10px;
     border-radius: 15px;
+    display: flex;
+    align-items: start;
+    gap: 15px;
+    transition: all 0.4s;
+    box-shadow: 0 9px #999;
+    margin: 10px 0px 10px;
+}
+
+.task.expanded {
+    box-shadow: 0 18px #666;
+    margin: 1px 0px 10px;
+}
+
+.task:hover {
+    background-color: #ceb7b5;
 }
 
 .project {
@@ -44,3 +160,20 @@ body {
 .project:hover {
     background-color: aqua;
 }
+
+#addproject, #addtask {
+    position: fixed;
+    top: 20px;
+    background-color: var(--accent);
+    display: none;
+    flex-direction: column;
+}
+
+#addproject {
+    left: 0;
+}   
+
+#addtask {
+    right: 0;
+}
+

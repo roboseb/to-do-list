@@ -1,18 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Seb's To-Do List</title>
-  </script><script defer src="index.bundle.js"></script></head>
-  <body>
-      <div id='container'>
-          <div id='header'>
-              <h1>THIS is Seb's Task Fueled Dating Sim</h1>
-          </div>
-          <div id='sidebar'>
-              <h2>Projects</h2>
-          </div>
-          <div id='tasks'></div>
-      </div>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <title>Seb's To-Do List</title>
+        </script><script defer src="index.bundle.js"></script>
+    </head>
+    <body>
+        <div id='container'>
+        <div id='header'>
+            <h1>THIS is Seb's Task Fueled Dating Sim</h1>
+        </div>
+        <div id='sidebar'>
+            <h2>Projects</h2>
+            <button id='openprojpanel'>Add Project</button>
+        </div>
+        <div id=taskcontainer>
+            <div id='tasks'></div>
+            <div id='donetasks'></div>
+        </div>
+        
+        <div id='addproject'>
+            <h2>Add Project</h2>
+            <label for="addprojectname">Project Name</label> 
+            <input id="addprojectname" type="text" value='Project'>
+            <button id="addprojbtn">ADD</button>
+            <button id="closeprojpanel">close</button>
+            
+        </div>
+        <div id='addtask' >
+            <h2>Add Task</h2>
+
+            <label for="addtaskname">Task Name</label> 
+            <input id="addtaskname" type="text" value='Task'>
+            <label for="addtaskdesc">Task Description</label> 
+            <input id="addtaskdesc" type="text" value='Task description'>
+            <label for="addtaskdate">Due Date</label> 
+            <input id="addtaskdate" type="date" value="2018-07-22">
+            <label for="addtaskvalue">Value</label> 
+            <input id="addtaskvalue" type="number" value="20">
+
+            <label for="addtaskpriority">Priority</label> 
+            <input type="radio" id="low" value="Low" name="priority" checked>
+            <label for="low">Low</label><br>
+            <input type="radio" id="high" value="High" name="priority">
+            <label for="high">High</label>
+
+            <button id="addtaskbtn">ADD</button>
+            <button id="closetaskpanel">close</button>
+        </div>
+    </body>
 </html>
