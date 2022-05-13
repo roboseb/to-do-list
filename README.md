@@ -34,4 +34,6 @@ DONE-task projects
 DONE-remove task button
 DONE-remove project button
 -Edit task button
--Custom font
+DONE-Custom font
+-fix cursor bugs
+-customize radio buttons

@@ -46,7 +46,7 @@ const Task = (name, description, dueDate, priority, value) => {
 const TaskHandler = (() => {
     const taskBox = document.getElementById('tasks'); 
     const doneTaskBox = document.getElementById('donetasks'); 
-    const sideBar = document.getElementById('sidebar');
+    const projectPanel = document.getElementById('projectpanel');
     const addTaskPanel = document.getElementById('addtask');
     let anyOpen = false;
     let lastProject;
@@ -169,8 +169,8 @@ const TaskHandler = (() => {
         //Create button to delete a project.
         const deleteProjectButton = document.createElement('button');
         deleteProjectButton.innerText = 'X';
-        sideBar.appendChild(newProject);
-        sideBar.appendChild(deleteProjectButton);
+        projectPanel.appendChild(newProject);
+        projectPanel.appendChild(deleteProjectButton);
 
         deleteProjectButton.addEventListener('click', () => {
             if (project.isOpen()) {
@@ -185,12 +185,18 @@ const TaskHandler = (() => {
         
 
         newProject.addEventListener('click', () => {
+            const projList = Array.from(document.querySelectorAll('.project'));
+            console.log(project.isOpen())
 
-            //Close if the the selected project if it is open.
+            //Close if the selected project is open.
             if (project.isOpen()) {
                 hideTasks();
                 project.setOpen(false);
                 anyOpen = false;
+                projList.forEach(proj => {
+                    proj.classList.remove('openproject');
+                });
+                
 
             //Open the selected project.
             } else if (!anyOpen) {
@@ -198,13 +204,20 @@ const TaskHandler = (() => {
                 project.setOpen(true);
                 anyOpen = true;
                 currentProject = project;
+                newProject.classList.add('openproject');
 
             //Close a currently open project and open the selected one.
             } else {
                 hideTasks();
                 lastProject.setOpen(false);
+                project.setOpen(true);
                 showTasks(project);
                 currentProject = project;
+                projList.forEach(proj => {
+                
+                    proj.classList.remove('openproject');
+                });
+                newProject.classList.add('openproject');
             }
             lastProject = project;    
         });
@@ -219,6 +232,7 @@ const TaskHandler = (() => {
 
         //Create button to add a new task.
         const addTaskButton = document.createElement('button');
+        addTaskButton.id = 'addtaskbtn';
         addTaskButton.innerText = 'Add Task';
         taskBox.appendChild(addTaskButton);
         addTaskButton.addEventListener('click', () => {

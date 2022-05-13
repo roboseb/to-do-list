@@ -4,13 +4,12 @@ html {
     --secondary: burlywood;
     --accent: #9C528B;
     --lightaccent: #c390b7;
+    --accent2: #5becd9;
 }
 
 body {
     margin: 0;
-}
-
-body {
+    font-family: 'Josefin Sans', sans-serif;
     cursor: url('/src/images/cursormain.png'), auto;
 }
 
@@ -19,11 +18,12 @@ body {
     animation-iteration-count: infinite;
 }
 
-button {
+button, input {
     cursor: url('/src/images/cursorlink.png'), auto;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-button:active {
+button:active, input:active{
     animation: linkclick 3000s;
     animation-iteration-count: infinite;
 }
@@ -38,11 +38,20 @@ button:active {
     to {cursor: url('/src/images/cursormain.png'), auto;}
 }
 
+h2 {
+    margin: 10px 0px 10px 0;
+}
+
+*::selection {
+    background-color: rgba(255, 255, 255, 0.2);
+    filter: opacity(0.2);
+}
+
 #container {
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr 6fr;
 }
 
@@ -51,37 +60,99 @@ button:active {
     grid-column: span 2;
     display: flex;
     align-items: center;
-}
-
-#header>h1 {
-    margin: 20px;
+    box-shadow: 0px 5px 7px grey;
+    padding: 15px;
 }
 
 #sidebar {
     background-color: var(--secondary);
+    margin: 10px 0 10px 10px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 7px grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s;
+    padding: 15px;
+    gap: 15px;
+}
+
+#sidebar>#projectpanel {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 15px;
+    row-gap: 10px;
+    align-items: end;
+    justify-items: end;
+}
+
+#sidebar>#projectpanel>button {
+    padding: 10px 13px;
+    border-radius: 20px;
 }
 
 #taskcontainer {
     display: flex;
     flex-direction: column;
-    background-color: #555;
     gap: 10px;
     padding: 10px;
 }
 
 #tasks, #donetasks{
-    background: var(--backdrop);
+    background: var(--secondary);
     display: flex;
     flex-direction: column;
     padding: 15px 0px 15px 15px;
     align-items: start;
     border-radius: 12px;
     transition: all 1s;
+    position: relative;
+    box-shadow: 0px 5px 7px grey;
+}
+
+#tasks button#addtaskbtn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    transition: all 0s;
 }
 
 #donetasks {
     background-color: var(--secondary);
     flex-grow: 1;
+    position: relative;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 23% 50%;
+	}
+
+    90% {
+		background-position: 120% 50%;
+	}
+    100% {
+		background-position: 120% 50%;
+	}
+}
+
+button:not(.checkbtn, #addpanelbox *):hover {
+    background: var(--accent);
+    background: linear-gradient(90deg, rgba(156,82,139,1) 0%, rgba(156,82,139,1) 40%, rgba(195,144,183,1) 50%, rgba(156,82,139,1) 60%, rgba(156,82,139,1) 100%);
+    animation: gradient 1.5s ease infinite;
+    background-size: 400% 400%;
+}
+
+button:not(.checkbtn, #addpanelbox *):active {
+    animation: linkclick 3000s;
+}
+
+#donetasks>.task {
+    filter: opacity(0.6)
+}
+
+#donetasks>.task.expanded {
+    filter: opacity(1);
     
 }
 
@@ -143,6 +214,32 @@ button:not(.checkbtn):active {
     margin: 10px 0px 10px;
 }
 
+.task>div {
+    align-self: center;
+}
+
+.project {
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    white-space: nowrap;
+    transition: all 0.4s;
+    box-shadow: 0 9px #999;
+    margin: 10px 0px 9px;
+}
+
+.project.openproject {
+    box-shadow: 0 3px #666;
+    transform: translate(0, 6px);
+    background-color: rgb(202, 202, 202);
+    color: black;
+}
+
+.project:hover {
+    background-color: #ceb7b5;
+    color: black;
+}
+
 .task.expanded {
     box-shadow: 0 18px #666;
     margin: 1px 0px 10px;
@@ -152,21 +249,43 @@ button:not(.checkbtn):active {
     background-color: #ceb7b5;
 }
 
-.project {
-    background-color: white;
-    border-style: solid;
-}
-
-.project:hover {
-    background-color: aqua;
+#addpanelbox {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
 }
 
 #addproject, #addtask {
-    position: fixed;
-    top: 20px;
     background-color: var(--accent);
     display: none;
     flex-direction: column;
+    margin: 0 15px 15px 0;
+    padding: 15px;
+    border-radius: 12px;
+    position: relative;
+    width: 200px;
+    box-shadow: 0px 5px 7px grey;
+}
+
+input:not([type='radio']) {
+    margin: 5px 0 15px 0;
+    padding: 7px 5px 5px 5px;
+    outline: none;
+    border-radius: 10px;
+    border-style: none;
+    box-shadow: inset -2px 4px 5px 0px rgb(141, 141, 141);
+    transition: all 0.5s;
+}
+
+input[type='radio'] {
+    padding: 20px;
+}
+
+input:not([type='radio']):hover,
+input:not([type='radio']):focus {
+    background-color: var(--accent2);
 }
 
 #addproject {
@@ -177,3 +296,28 @@ button:not(.checkbtn):active {
     right: 0;
 }
 
+#radiobox {
+    display: flex;
+    gap: 5px;
+}
+
+button#closetaskpanel, button#closeprojpanel {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+#addpanelbox button {
+    background-color: white;
+    color: black;
+}
+
+#addpanelbox>*>button:hover {
+    background-color: var(--primary);
+}
+
+footer {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
