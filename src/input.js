@@ -20,10 +20,10 @@ const projectInput = (() => {
     addProjButton.addEventListener('click', () => {
         const newProject = Project(addProjInput.value);
         TaskHandler.displayProject(newProject);
+        localStorage.setItem(`project_${newProject.getTitle()}_title`, newProject.getTitle());
     });
 
     addTaskButton.addEventListener('click', () => {
-        console.log(this)
         
         const addTaskPriority = document.querySelector('input[name="priority"]:checked').value;
         const newTask = Task(addTaskName.value, addTaskDesc.value, addTaskDate.value, addTaskPriority, addTaskValue.value);
@@ -31,6 +31,8 @@ const projectInput = (() => {
      
         TaskHandler.getCurrent().addTask(newTask);
         TaskHandler.displayTask(newTask);
+        TaskHandler.hideTasks();
+        TaskHandler.showTasks(TaskHandler.getCurrent());
     });
 
     projPanelButton.addEventListener('click', () => {

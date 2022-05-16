@@ -5,8 +5,21 @@ import './styles.css';
 
 //import { container } from "webpack";
 
-const test = Task('cock', 'Suck a cock', '2018-07-22');
-const seb = Task('seb');
+function allStorage() {
+
+    let values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+    while ( i-- ) {
+        values.push( localStorage.getItem(keys[i]) );
+    }
+
+    return values;
+}
+
+const test = Task('cock', 'Suck a cock', '2018-07-22', 'Low');
+const seb = Task('seb', 'Seb is awesome', '2022-05-15', 'High');
 const travis = Task('travis');
 
 
@@ -17,11 +30,30 @@ const newProject2 = Project('Newproject2');
 
 
 
+
+
+//eval('const ' + allStorage()[1] + '= ' + allStorage()[1] + ';');
+
+Function('const ' + 'testproject' + '= ' + 'hi this is a test' + ';');
+
+function looseJsonParse(obj) {
+    return Function('"use strict";return (' + obj + ')')();
+}
+
+console.log(testproject);
+
+console.log(allStorage()[1]);
+
+
+
+
+
+
 TaskHandler.displayProject(newProject);
 TaskHandler.displayProject(newProject2);
 
-newProject.addTask(test, seb, travis)
-newProject2.addTask(test, test, test)
+newProject.addTask(test, seb, travis);
+newProject2.addTask(test, test, test);
 
 const buttons = Array.from(document.querySelectorAll('.project'));
 
@@ -41,5 +73,8 @@ document.addEventListener('mousedown', () => {
 document.addEventListener('mouseup', () => {
     const container = document.getElementById('container');
     container.classList.remove('mainclicked');
-})
+});
 
+
+
+console.log(allStorage());

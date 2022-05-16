@@ -22,6 +22,12 @@ May 11th, 2022
 
     Another pretty solid day. I was able to quickly fix the remove project button, which was not working properly at the end of my time yesterday. Also added a checkbox for tasks, which required slighly reworking a few things, but it's pretty solid now.
 
+May 15th, 2022
+
+    I actually did work for 6 hours on this on the 12th. Then I got busy one day and didn't work. Then I somehow got sick again, and am currently all stuffed up. Oh well, better one day lost than almost a week. Base project is largely done. I think I may as well pimp this out with all the features I imagined. Probably won't double the development time to add the dating sim stuff and local storage. Might take six hours to customize the radio buttons though.
+
+    Did not take six hours to do the radio buttons.
+
 
 ---To-Do---
 
@@ -29,11 +35,13 @@ May 11th, 2022
 DONE-Add task button
 -Edit task button
 DONE-task projects
--animate opening.closing tasks
--show a project is empty with a message
+-animate opening and closing tasks
+CANCEL-show a project is empty with a message
 DONE-remove task button
 DONE-remove project button
--Edit task button
 DONE-Custom font
 -fix cursor bugs
--customize radio buttons
+DONE-customize radio buttons
+DONE-Differentiate priorities
+DONE-sort by priority
+-Add local storage

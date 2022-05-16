@@ -51,6 +51,7 @@ const TaskHandler = (() => {
     let anyOpen = false;
     let lastProject;
     let currentProject;
+    const emptyBoxHeader = taskBox.querySelector('h2');
 
     const getCurrent = () => {
         return currentProject;
@@ -110,7 +111,14 @@ const TaskHandler = (() => {
         let taskExpanded = false;
 
         if (task.getValue()) newTaskText += `\n\n${task.getValue()} GBP`;
-
+        if (task.getPriority()) {
+            if (task.getPriority() === 'Low') {
+                newTask.classList.add('lowpriority');
+            } else {
+                newTask.classList.add('highpriority');
+            }
+            
+        } 
         createCheckButton();
 
       
@@ -123,6 +131,7 @@ const TaskHandler = (() => {
         newTask.appendChild(textBox);
         
         if (!task.getChecked()) {
+            
             taskBox.appendChild(newTask);
         } else {
             doneTaskBox.appendChild(newTask);
@@ -186,7 +195,6 @@ const TaskHandler = (() => {
 
         newProject.addEventListener('click', () => {
             const projList = Array.from(document.querySelectorAll('.project'));
-            console.log(project.isOpen())
 
             //Close if the selected project is open.
             if (project.isOpen()) {
@@ -230,6 +238,8 @@ const TaskHandler = (() => {
         projHeader.classList.add('projheader');
         taskBox.appendChild(projHeader);
 
+        emptyBoxHeader.style.display = 'none';
+
         //Create button to add a new task.
         const addTaskButton = document.createElement('button');
         addTaskButton.id = 'addtaskbtn';
@@ -245,12 +255,20 @@ const TaskHandler = (() => {
             }
         });
 
+        //Display all of a project's tasks in priority order;
         project.getTasks().forEach(task => {
-            displayTask(task);
+            if (task.getPriority() === 'High') displayTask(task); 
+        });
+        project.getTasks().forEach(task => {
+            if (task.getPriority() === 'Low') displayTask(task); 
+        });
+        project.getTasks().forEach(task => {
+            if (!task.getPriority()) displayTask(task); 
         });
     }
 
     const hideTasks = () => {
+        emptyBoxHeader.style.display = 'block';
         const tasks = Array.from(document.querySelectorAll('.task'));
         tasks.forEach(task => {
             task.remove();
@@ -262,7 +280,7 @@ const TaskHandler = (() => {
         projHeader.remove();
     }
 
-    return {displayProject, getCurrent, displayTask}
+    return {displayProject, getCurrent, displayTask, hideTasks, showTasks}
 })();
 
 //Project constructor.
@@ -270,8 +288,6 @@ let Project = (name) => {
     let tasks = [];
     let title = name;
     let projectOpen = false;
-
-    console.log(title);
 
     const isOpen = () => {
         return projectOpen;
