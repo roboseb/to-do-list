@@ -28,12 +28,20 @@ May 15th, 2022
 
     Did not take six hours to do the radio buttons.
 
+May 16th, 2022
+
+    So I was sick yesterday again and wasn't able to do a full day of work. Today will therefore be the day to learn local storage. Seems crazy useful, but I got stuck on it yesterday. Making good progress so far today. Projects lists will be easy to save since at base level they only have a name, but adding tasks to them and saving all the task info will likely be tricky given the limited JSON files.
+
+    Local storage is done, and a lot was learned. Most important thing was using JSON.parse and JSON.stringify. Insanely useful here and I'm sure in many other cases.
+
 
 ---To-Do---
 
 -Add loretta
+-Add item shop
+-Add currency counter
 DONE-Add task button
--Edit task button
+CANCEL-Edit task button
 DONE-task projects
 -animate opening and closing tasks
 CANCEL-show a project is empty with a message
@@ -44,4 +52,5 @@ DONE-Custom font
 DONE-customize radio buttons
 DONE-Differentiate priorities
 DONE-sort by priority
--Add local storage
+DONE-Add local storage
+DONE-Add character limit to project names

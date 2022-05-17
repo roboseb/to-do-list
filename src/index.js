@@ -2,6 +2,8 @@ import { Project, Task, TaskHandler } from "./task";
 import { projectInput } from "./input";
 import _ from 'lodash';
 import './styles.css';
+export {taskList}
+//import { LoaderOptionsPlugin } from "webpack";
 
 //import { container } from "webpack";
 
@@ -18,44 +20,79 @@ function allStorage() {
     return values;
 }
 
-const test = Task('cock', 'Suck a cock', '2018-07-22', 'Low');
-const seb = Task('seb', 'Seb is awesome', '2022-05-15', 'High');
-const travis = Task('travis');
+let projectList = {};
+let taskList = [];
+
+const cock = Task('cock', 'New Project', 'Suck a cock', '2018-07-22', 'Low');
+const seb = Task('seb', 'New Project', 'Seb is awesome', '2022-05-15', 'High');
+const travis = Task('travis', 'Newproject2');
+
+taskList.push(cock);
+taskList.push(seb);
+taskList.push(travis);
+
+projectList['New Project'] = Project('New Project');
+projectList['Newproject2'] = Project('Newproject2');
 
 
-const newProject = Project('New Project');
+//Add projects from local storage to project list.
+Object.keys(localStorage).forEach(key => {
+    if (key.startsWith('proj_')) {
+        projectList[key.slice(5)] = Project(localStorage[key]);
+    }
+});
 
-
-const newProject2 = Project('Newproject2');
-
-
-
-
-
-//eval('const ' + allStorage()[1] + '= ' + allStorage()[1] + ';');
-
-Function('const ' + 'testproject' + '= ' + 'hi this is a test' + ';');
-
-function looseJsonParse(obj) {
-    return Function('"use strict";return (' + obj + ')')();
+//Display all projects in project list.
+for (const proj in projectList) {    
+    TaskHandler.displayProject(projectList[proj]);
 }
 
-console.log(testproject);
+//Add tasks from local storage to task list.
+Object.keys(localStorage).forEach(key => {
+    if (key.startsWith('task_')) {
+    
+        const localTask = JSON.parse(localStorage[key]);
+        const newTask = Task(localTask.taskName, 
+                            localTask.taskProj,
+                            localTask.taskDesc,
+                            localTask.taskDate,
+                            localTask.taskPriority,
+                            localTask.taskValue,
+                            localTask.checked);
+        taskList.push(newTask);    
+    }
+});
 
-console.log(allStorage()[1]);
+//Add tasks to their relevant projects.
+taskList.forEach(task => {    
+    const taskProject = task.getProject();
+    projectList[taskProject].addTask(task);
+  
+});
 
 
 
 
 
 
-TaskHandler.displayProject(newProject);
-TaskHandler.displayProject(newProject2);
 
-newProject.addTask(test, seb, travis);
-newProject2.addTask(test, test, test);
 
-const buttons = Array.from(document.querySelectorAll('.project'));
+
+// window.addEventListener('click', () => {
+//     console.log(Object.keys(localStorage));
+// });
+
+// console.log(localStorage['task_Task_project']);
+
+
+
+// TaskHandler.displayProject(newProject);
+// TaskHandler.displayProject(newProject2);
+
+// newProject.addTask(test, seb, travis);
+// newProject2.addTask(test, test, test);
+
+// const buttons = Array.from(document.querySelectorAll('.project'));
 
 // buttons.forEach(button => {
 //     button.addEventListener('click', () => {
@@ -74,7 +111,3 @@ document.addEventListener('mouseup', () => {
     const container = document.getElementById('container');
     container.classList.remove('mainclicked');
 });
-
-
-
-console.log(allStorage());

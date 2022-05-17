@@ -1,18 +1,25 @@
 import { isArguments } from "lodash";
+import {taskList} from "./index"
 export {Task, TaskHandler, Project}
 
 //Task constructor.
-const Task = (name, description, dueDate, priority, value) => {
+const Task = (name, project, description, dueDate, priority, value, taskChecked) => {
     let taskName = name;
+    let taskProj = project;
     let taskDesc = description;
     let taskDate = dueDate;
     let taskPriority = priority;
     let taskValue = value;
-    let checked = false
+    let checked = taskChecked;
+    
 
     const getName = () => { 
         return taskName;
     } 
+
+    const getProject = () => {
+        return taskProj;
+    }
 
     const getDesc = () => {
         return taskDesc;
@@ -39,7 +46,7 @@ const Task = (name, description, dueDate, priority, value) => {
     }
 
     return {getName, getDesc, getDate, getPriority, getValue,
-            getChecked, setChecked}
+            getChecked, setChecked, getProject, taskName, taskProj, taskDesc, taskDate, taskPriority, taskValue, checked}
 };
 
 //Used to display tasks and projects.
@@ -65,9 +72,19 @@ const TaskHandler = (() => {
             removeTaskButton.classList.add('remove');
             removeTaskButton.innerText = 'remove';
 
+            //Remove task from DOM, tasklist, localStorage, and project tasks.
             removeTaskButton.addEventListener('click', () => {
                 newTask.remove();
                 currentProject.removeTask(task);
+
+
+                //Remove local storage for task if it exists.            
+                if (localStorage[`task_${task.getName()}`]) {
+                    delete localStorage[`task_${task.getName()}`];
+                }
+                
+                const taskIndex = taskList.indexOf(task);
+                taskList.splice(taskIndex,1);
             });
             newTask.appendChild(removeTaskButton);
         }
@@ -92,10 +109,25 @@ const TaskHandler = (() => {
                     newTask.remove();
                     task.setChecked(false);
                     displayTask(task);
+
+                    //Update checked state in local storage.
+                    if (localStorage[`task_${task.getName()}`]) {
+                        let updatedTask = task;
+                        updatedTask.checked = false;
+                        localStorage[`task_${task.getName()}`] = JSON.stringify(updatedTask);
+                    }
+                   
                 } else {
                     newTask.remove();
                     task.setChecked(true);
                     displayTask(task);
+
+                    //Update checked state in local storage.
+                    if (localStorage[`task_${task.getName()}`]) {
+                        let updatedTask = task;
+                        updatedTask.checked = true;
+                        localStorage[`task_${task.getName()}`] = JSON.stringify(updatedTask);
+                    }                   
                 }
             });
             newTask.appendChild(checkButton);
@@ -187,6 +219,13 @@ const TaskHandler = (() => {
                 project.setOpen(false);
                 anyOpen = false;
             }
+
+            //Remove local storage for project if it exists.            
+            if (localStorage[`proj_${project.getTitle()}`]) {
+                delete localStorage[`proj_${project.getTitle()}`];
+            }
+            
+
             newProject.remove();
             deleteProjectButton.remove();
         });
