@@ -51,22 +51,30 @@ h2 {
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 6fr;
+    gap: 10px;
+   
 }
+
 
 #header {
     background-color: var(--lightaccent);
-    grid-column: span 2;
+    grid-column: span 3;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     box-shadow: 0px 5px 7px grey;
     padding: 15px;
+    
+}
+
+#header>#points {
+    font-size: 4rem;
 }
 
 #sidebar {
     background-color: var(--secondary);
-    margin: 10px 0 10px 10px;
     border-radius: 12px;
     box-shadow: 0px 5px 7px grey;
     display: flex;
@@ -75,6 +83,11 @@ h2 {
     transition: all 1s;
     padding: 15px;
     gap: 15px;
+    margin-bottom: 10px;
+}
+
+#sidebar {
+    margin-left: 10px;
 }
 
 #sidebar>#projectpanel {
@@ -95,7 +108,6 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px;
 }
 
 #tasks, #donetasks{
@@ -114,13 +126,14 @@ h2 {
     position: absolute;
     bottom: 15px;
     right: 15px;
-    transition: all 0s;
+
 }
 
 #donetasks {
     background-color: var(--secondary);
     flex-grow: 1;
     position: relative;
+    margin-bottom: 10px;
 }
 
 @keyframes gradient {
@@ -187,7 +200,7 @@ button:not(.checkbtn) {
     border-style: none;
     
     padding: 5px 10px 5px 10px;
-    transition: background-color 0.5s;
+  
 
     box-shadow: 0 9px #999;
     margin-bottom: 9px;
@@ -251,9 +264,8 @@ button:not(.checkbtn):active {
     color: black;
 }
 
-.project:hover {
+.project:hover, #simbox>div>h3:hover {
     background-color: #ceb7b5;
-    color: black;
 }
 
 .task.expanded {
@@ -373,9 +385,138 @@ footer {
     right: 15px;
 }
 
-#loretta>img {
-    position: fixed;
-    right: 15px;
-    bottom: 60px;
-    height: 25vh;
+#loretta {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
+
+#loretta>img {
+    height: 100%; 
+    max-width: 200px;
+}
+
+#simboxcontainer {
+    position: relative;
+}
+
+#simbox {
+    background-color: var(--secondary);
+    border-radius: 12px;
+    box-shadow: 0px 5px 7px grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s;
+    padding: 15px;
+    gap: 15px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#simbox>div>h3 {
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    white-space: nowrap;
+    transition: all 0.4s;
+    box-shadow: 0 9px #999;
+    margin: 0;
+    align-self: start;
+    transform: translate(0, -6px);
+}
+
+#simbox>#shop, #simbox>#inventory {
+    background-color: white;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: inset 0px 5px 7px grey;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    min-height: calc(2rem + 9px);
+    position: relative;
+}
+
+#simbox>div>div::-webkit-scrollbar {
+    display: none;
+}
+
+
+#simbox>div>#shopgrid, #simbox>div>#inventorygrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    border-radius: 0 0 15px 15px;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+    transition: all 0.5s;
+}
+
+
+
+#simbox #gap {
+    flex-grow: 1;
+    background-color: black;
+}
+
+#simbox .openitems {
+    box-shadow: 0 3px #666;
+    transform: translate(0, 0px);
+    background-color: rgb(202, 202, 202);
+    color: black;
+    margin-bottom: 5px;
+    
+}
+
+#simbox .shopitem, #simbox .inventoryitem {
+    aspect-ratio: 1;
+    background-color: var(--accent);
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 3px #666;
+    transition: all 0.4s;
+    position: relative;
+}
+
+#simbox .shopitem:hover, #simbox .inventoryitem:hover {
+    background-color: var(--lightaccent);
+}
+
+.shopitem>img, .inventoryitem>img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.descbox {
+    position: absolute;
+    background-color: rgba(156,82,139,0.7);
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    display: none;
+    z-index: 1;
+    border-radius: 5px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    filter: opacity(0);
+    transition: all 0.4s;
+}
+
+.descbox>img {
+    width: 80%;
+}
+

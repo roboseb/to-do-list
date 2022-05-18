@@ -2,6 +2,7 @@ import { isArguments } from "lodash";
 import {taskList} from "./index"
 export {Task, TaskHandler, Project}
 
+
 //Task constructor.
 const Task = (name, project, description, dueDate, priority, value, taskChecked) => {
     let taskName = name;
@@ -60,8 +61,27 @@ const TaskHandler = (() => {
     let currentProject;
     const emptyBoxHeader = taskBox.querySelector('h2');
 
+    const pointsDisplay = document.getElementById('points');
+
+    let points = 0;
+
     const getCurrent = () => {
         return currentProject;
+    }
+
+    const getPoints = () => {
+        return points;
+    }
+
+    const updatePoints = (change) => {
+        points += change;
+        pointsDisplay.innerText = `${points} ₪`;
+
+        //Update points in local storage.
+        localStorage['points'] = points;
+        console.log(localStorage['points']);
+
+        return points;
     }
 
     const displayTask = (task) => {
@@ -116,6 +136,10 @@ const TaskHandler = (() => {
                         updatedTask.checked = false;
                         localStorage[`task_${task.getName()}`] = JSON.stringify(updatedTask);
                     }
+                    //Remove points based on task value.
+                    if (task.getValue() !== undefined) {
+                        updatePoints(parseInt(task.getValue()) * -1);
+                    }
                    
                 } else {
                     newTask.remove();
@@ -127,7 +151,12 @@ const TaskHandler = (() => {
                         let updatedTask = task;
                         updatedTask.checked = true;
                         localStorage[`task_${task.getName()}`] = JSON.stringify(updatedTask);
-                    }                   
+                    }                  
+                    //Add points based on point value.
+
+                    if (task.getValue() !== undefined) {
+                        updatePoints(parseInt(task.getValue()));
+                    }
                 }
             });
             newTask.appendChild(checkButton);
@@ -142,7 +171,7 @@ const TaskHandler = (() => {
         let newTaskText = task.getName();
         let taskExpanded = false;
 
-        if (task.getValue()) newTaskText += `\n\n${task.getValue()} GBP`;
+        if (task.getValue()) newTaskText += `\n\n${task.getValue()} ₪`;
         if (task.getPriority()) {
             if (task.getPriority() === 'Low') {
                 newTask.classList.add('lowpriority');
@@ -180,7 +209,7 @@ const TaskHandler = (() => {
                 if (task.getDesc()) newTaskText += `\n\n${task.getDesc()}`;
                 if (task.getDate()) newTaskText += `\n\nDue ${task.getDate()}`;
                 if (task.getPriority()) newTaskText += `\n\n${task.getPriority()} priority`;
-                if (task.getValue()) newTaskText += `\n\n${task.getValue()} GBP`;
+                if (task.getValue()) newTaskText += `\n\n${task.getValue()} ₪`;
                 
                 textBox.innerText = newTaskText;
                 createDeleteButton();
@@ -189,7 +218,7 @@ const TaskHandler = (() => {
                 newTask.classList.remove('expanded');
                 let newTaskText = task.getName();
                 
-                if (task.getValue()) newTaskText += `\n\n${task.getValue()} GBP`;
+                if (task.getValue()) newTaskText += `\n\n${task.getValue()} ₪`;
                 
                 textBox.innerText = newTaskText;
 
@@ -319,7 +348,8 @@ const TaskHandler = (() => {
         projHeader.remove();
     }
 
-    return {displayProject, getCurrent, displayTask, hideTasks, showTasks}
+    return {displayProject, getCurrent, displayTask, hideTasks,
+            getPoints, updatePoints, showTasks}
 })();
 
 //Project constructor.

@@ -1,5 +1,6 @@
 import { Project, Task, TaskHandler } from "./task";
 import { projectInput } from "./input";
+import {romance, Items} from "./romance"
 import _ from 'lodash';
 import './styles.css';
 export {taskList}
@@ -70,6 +71,11 @@ taskList.forEach(task => {
   
 });
 
+//Set points from local storage if it exists.
+
+if (localStorage['points'] !== undefined) {
+    TaskHandler.updatePoints(parseInt(localStorage['points']));
+}
 
 
 

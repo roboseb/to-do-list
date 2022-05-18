@@ -34,6 +34,12 @@ May 16th, 2022
 
     Local storage is done, and a lot was learned. Most important thing was using JSON.parse and JSON.stringify. Insanely useful here and I'm sure in many other cases.
 
+May 17th, 2022
+
+    Pretty long project this one. Expecting another two days out of it to finish the store and currency systems. Prett damn proud of it though. Most of my other stuff has either had a compromise or two, or I just decided it was done when I may have had other ideas left. Almost did that here, but though if I went all out it would make a pretty cute portfolio piece. Only think I might be skipping is an edit task/project option. Might add to the overall charm though. As an aside, I was assaulted by a youtube scam ad for some bootcamp crap that specifically showcased a meme roasting a to-do list as a portfolio piece. Here's hoping this project will have some relevance down the line. If nothing else, it will have given me a ton of practice with new and old skill alike. Shoutout to my boy SUI UZI for getting me through some of this.
+
+    Flex-grow items with overflowing content in a flexbox are fucked. Spent probably an hour on this one issue in my romance section, and it was somehow fixed by giving the items min-height: 0. Thanks stack overflow.
+
 
 ---To-Do---
 
@@ -54,3 +60,14 @@ DONE-Differentiate priorities
 DONE-sort by priority
 DONE-Add local storage
 DONE-Add character limit to project names
+-Add animations for loretta
+-add currency counter and logic
+-add item shop
+-add inventory
+-Add ending to Loretta path?
+-add animations/effects for finishing task and gifting
+-fix resolution on item icons
+-Highlight task value somehow
+-add limit to points value
+-reset gamedata button?
+-Add arrow to show you can scroll
