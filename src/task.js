@@ -74,14 +74,32 @@ const TaskHandler = (() => {
     }
 
     const updatePoints = (change) => {
+        const prevPoints = points;
         points += change;
         pointsDisplay.innerText = `${points} ₪`;
 
         //Update points in local storage.
         localStorage['points'] = points;
-        console.log(localStorage['points']);
+        if (change < 100) {
+            animateValue(pointsDisplay, prevPoints, points, Math.abs(change*100));
+        }
+        
 
         return points;
+    }
+
+    //Animate changes in points.
+    const  animateValue = (obj, start, end, duration) => {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = (Math.floor(progress * (end - start) + start)) + ' ₪';
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
     }
 
     const displayTask = (task) => {

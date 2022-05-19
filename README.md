@@ -40,6 +40,13 @@ May 17th, 2022
 
     Flex-grow items with overflowing content in a flexbox are fucked. Spent probably an hour on this one issue in my romance section, and it was somehow fixed by giving the items min-height: 0. Thanks stack overflow.
 
+May 18th, 2022 
+
+    Optimistically, this will be my last day on this project. Depends on how fancy I want to get with displaying all the romance stuff. The actual logic for it should be relatively straightforward, although setting up image paths has been a slight pain so far.
+
+    As a quick aside, my task and project factory functions have been pretty stupid so far. Technically doesn't look that bad, but the way I've made the item factory I believe works basically the same in only three lines of code.
+    Yeesh.
+
 
 ---To-Do---
 
@@ -71,3 +78,5 @@ DONE-Add character limit to project names
 -add limit to points value
 -reset gamedata button?
 -Add arrow to show you can scroll
+-local storage for hat location
+-add scroll for overflowing tasks/projects

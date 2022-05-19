@@ -8,19 +8,6 @@ export {taskList}
 
 //import { container } from "webpack";
 
-function allStorage() {
-
-    let values = [],
-        keys = Object.keys(localStorage),
-        i = keys.length;
-
-    while ( i-- ) {
-        values.push( localStorage.getItem(keys[i]) );
-    }
-
-    return values;
-}
-
 let projectList = {};
 let taskList = [];
 
@@ -72,41 +59,9 @@ taskList.forEach(task => {
 });
 
 //Set points from local storage if it exists.
-
 if (localStorage['points'] !== undefined) {
     TaskHandler.updatePoints(parseInt(localStorage['points']));
 }
-
-
-
-
-
-
-
-
-// window.addEventListener('click', () => {
-//     console.log(Object.keys(localStorage));
-// });
-
-// console.log(localStorage['task_Task_project']);
-
-
-
-// TaskHandler.displayProject(newProject);
-// TaskHandler.displayProject(newProject2);
-
-// newProject.addTask(test, seb, travis);
-// newProject2.addTask(test, test, test);
-
-// const buttons = Array.from(document.querySelectorAll('.project'));
-
-// buttons.forEach(button => {
-//     button.addEventListener('click', () => {
-//         console.log(`newProject is open? ${newProject.isOpen()}`);
-//         console.log(`newProject2 is open? ${newProject2.isOpen()}`);
-//     })
-// });
-
 
 //Animate cursor when not clicking a button.
 document.addEventListener('mousedown', () => {

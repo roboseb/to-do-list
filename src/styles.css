@@ -108,6 +108,11 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-height: 0;
+    overflow-y: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    border-radius: 12px;
 }
 
 #tasks, #donetasks{
@@ -120,6 +125,11 @@ h2 {
     transition: all 1s;
     position: relative;
     box-shadow: 0px 5px 7px grey;
+ 
+}
+
+#taskcontainer::-webkit-scrollbar {
+    display: none;
 }
 
 #tasks button#addtaskbtn {
@@ -390,11 +400,18 @@ footer {
     width: 100%;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
-#loretta>img {
+#loretta>img#lorettamain {
     height: 100%; 
     max-width: 200px;
+}
+
+#loretta>img#lorettahat {
+    position: absolute;
+    height: 100%;
+    transform: translateY(-29%);
 }
 
 #simboxcontainer {
@@ -500,13 +517,11 @@ footer {
 
 .descbox {
     position: absolute;
-    background-color: rgba(156,82,139,0.7);
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    display: none;
-    z-index: 1;
-    border-radius: 5px;
+    background-color: rgba(156,82,139,0.8);
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    border-radius: 15px;
     pointer-events: none;
     display: flex;
     flex-direction: column;
@@ -514,9 +529,13 @@ footer {
     color: white;
     filter: opacity(0);
     transition: all 0.4s;
+    text-align: center;
+    white-space: nowrap;
+    padding: 5px;
 }
 
-.descbox>img {
-    width: 80%;
+/* Offset description box based column item is in. */
+.inventoryitem:nth-child(2)>.descbox {
+    right: 0;
+    left: initial;
 }
-
