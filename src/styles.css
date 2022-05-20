@@ -42,9 +42,9 @@ h2 {
     margin: 10px 0px 10px 0;
 }
 
-*::selection {
-    background-color: rgba(255, 255, 255, 0.2);
-    filter: opacity(0.2);
+#containerbox {
+    display: flex;
+    flex-direction: column;
 }
 
 #container {
@@ -54,7 +54,17 @@ h2 {
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 6fr;
     gap: 10px;
-   
+}
+
+@media only screen and (min-width: 1200px) {
+    #container {
+        width: 1000px;
+        align-self: center;
+        background-color: var(--primary);
+    }
+    body {
+        background-color: var(--primary);
+    }
 }
 
 
@@ -84,6 +94,7 @@ h2 {
     padding: 15px;
     gap: 15px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 #sidebar {
@@ -113,6 +124,7 @@ h2 {
     -ms-overflow-style: none; 
     scrollbar-width: none; 
     border-radius: 12px;
+    position: relative;
 }
 
 #tasks, #donetasks{
@@ -125,7 +137,7 @@ h2 {
     transition: all 1s;
     position: relative;
     box-shadow: 0px 5px 7px grey;
- 
+    
 }
 
 #taskcontainer::-webkit-scrollbar {
@@ -134,9 +146,8 @@ h2 {
 
 #tasks button#addtaskbtn {
     position: absolute;
-    bottom: 15px;
+    top: 15px;
     right: 15px;
-
 }
 
 #donetasks {
@@ -144,6 +155,7 @@ h2 {
     flex-grow: 1;
     position: relative;
     margin-bottom: 10px;
+    padding-bottom: 40px;
 }
 
 @keyframes gradient {
@@ -188,6 +200,8 @@ button:not(.checkbtn, #addpanelbox *):active {
     transition: all 0.5s;
     color: transparent;
     position: relative;
+    min-height: 1rem;
+    min-width: 1rem;
 }
 
 .task>.checkbtn:hover {
@@ -234,7 +248,7 @@ button:not(.checkbtn):active {
     gap: 15px;
     transition: all 0.4s;
     box-shadow: 0 9px #999;
-    margin: 10px 0px 10px;
+    margin: 10px 10px 10px 0px;
 }
 
 .task.highpriority {
@@ -255,6 +269,7 @@ button:not(.checkbtn):active {
 
 .task>div {
     align-self: center;
+    
 }
 
 .project {
@@ -280,7 +295,6 @@ button:not(.checkbtn):active {
 
 .task.expanded {
     box-shadow: 0 18px #666;
-    margin: 1px 0px 10px;
 }
 
 .task:hover {
@@ -293,6 +307,11 @@ button:not(.checkbtn):active {
     right: 0;
     display: flex;
     align-items: flex-end;
+    pointer-events: none;
+    z-index: 2;
+}
+#addpanelbox * {
+    pointer-events: all;
 }
 
 #addproject, #addtask {
@@ -391,8 +410,8 @@ button#closetaskpanel, button#closeprojpanel {
 
 footer {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    bottom: 5px;
+    right: 5px;
 }
 
 #loretta {
@@ -406,12 +425,14 @@ footer {
 #loretta>img#lorettamain {
     height: 100%; 
     max-width: 200px;
+    filter: drop-shadow(0 13px 10px grey);
 }
 
 #loretta>img#lorettahat {
     position: absolute;
     height: 100%;
     transform: translateY(-29%);
+    pointer-events: none;
 }
 
 #simboxcontainer {
@@ -500,7 +521,7 @@ footer {
     background-color: var(--accent);
     border-radius: 5px;
     position: relative;
-    box-shadow: 0 3px #666;
+    box-shadow: 0 4px black;
     transition: all 0.4s;
     position: relative;
 }
@@ -513,6 +534,9 @@ footer {
     position: absolute;
     height: 100%;
     width: 100%;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
 }
 
 .descbox {
@@ -535,7 +559,56 @@ footer {
 }
 
 /* Offset description box based column item is in. */
-.inventoryitem:nth-child(2)>.descbox {
+.inventoryitem:nth-child(odd)>.descbox {
     right: 0;
     left: initial;
+}
+
+.shopitem:nth-child(odd)>.descbox {
+    right: 0;
+    left: initial;
+}
+
+#errorbox {
+    position: fixed;
+    font-size: 3rem;
+    color: white;
+    background-color: black;
+    padding: 8px;
+    border-radius: 10px;
+    bottom: 15px;
+    right: 15px;
+    border: 5px solid var(--accent);
+    display: none;
+}
+
+.indicator {
+    z-index: 1;
+    position: absolute;
+    transform: rotate(90deg);
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 100%;
+    height: 3rem;
+    width: 3rem;
+    filter: opacity(0);
+    text-align: center;
+    content: '>';
+    font-size: 3rem;
+    transition: transform 0.4s, bottom 0.6s ease-in-out, filter 0.4s;
+    pointer-events: none;
+}
+
+#sidebar>.indicator {
+    bottom: 15px;
+    right: calc(-3rem - 20px);
+}
+
+#shopgrid>.indicator {
+    filter: opacity(1);
+    right: 15px;
+}
+
+#inventorygrid>.indicator {
+    filter: opacity(1);
+    right: 15px;
 }

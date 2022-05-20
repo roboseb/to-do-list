@@ -80,7 +80,7 @@ const TaskHandler = (() => {
 
         //Update points in local storage.
         localStorage['points'] = points;
-        if (change < 100) {
+        if (change < 100 && change > -100) {
             animateValue(pointsDisplay, prevPoints, points, Math.abs(change*100));
         }
         
@@ -106,6 +106,7 @@ const TaskHandler = (() => {
 
         //Add a button to remove task from display and project task list.
         const createDeleteButton = () => {
+            
             const removeTaskButton = document.createElement('button');
             removeTaskButton.classList.add('remove');
             removeTaskButton.innerText = 'remove';
@@ -410,3 +411,97 @@ let Project = (name) => {
     return {getTitle, getTasks, addTask, removeTask, isOpen, setOpen}
 }
 
+//Handle scroll indicators based on various elements being scrolled.
+const ScrollIndicator = (() => {
+
+    const taskScroll = document.getElementById('taskscroll');
+    const shopScroll = document.getElementById('shopscroll');
+    const inventoryScroll = document.getElementById('inventoryscroll');
+    const scrollList = [taskScroll, shopScroll, inventoryScroll];
+
+    const taskBox = document.getElementById('taskcontainer');
+    const shopBox = document.getElementById('shopgrid');
+    const inventoryBox = document.getElementById('inventorygrid');
+    const boxList = [taskBox, shopBox, inventoryBox];
+
+    const shopButton = document.getElementById('shopbtn');   
+    const inventoryButton = document.getElementById('inventorybtn');   
+
+    let scrolledUp = false;
+    let scrolledDown = false;
+
+    //Display the scroll indicator based on scroll position.
+    const updateIndicator = (target, scroll) => {
+
+        //Check if target is scrolled up.
+        if (target.scrollTop === 0) {
+            scrolledUp = true;
+        } else {
+            scrolledUp = false;
+        }
+        
+        //Check if target is scrolled down.
+        if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+            scrolledDown = true;
+        } else {
+            scrolledDown = false;
+        }
+
+        //Check scrolledUp and scrolledDown to display the indicator.
+        if (scrolledDown && scrolledUp) {
+            scroll.style.filter = 'opacity(0)';
+        } else if (scrolledDown) {
+            scroll.style.filter = 'opacity(1)';
+            scroll.style.bottom = 'calc(100% - 4rem)';
+            scroll.style.transform = 'rotate(-90deg)';
+        } else if (scrolledUp) {
+            scroll.style.filter = 'opacity(1)';
+            scroll.style.bottom = '15px';
+            scroll.style.transform = 'rotate(90deg)';
+        } else {
+            scroll.style.filter = 'opacity(1)';
+        }
+    }
+  
+  
+    
+
+    //Add listeners to all scrollable elements and check initial state.
+    let i = 0;
+    boxList.forEach(box => {
+        
+        let index = i;
+
+        //Wait for boxes to load in then update the indicator.
+        //Yes, the wait time is 0. No idea why this works.
+        setTimeout(() => {
+            updateIndicator(box, scrollList[index]);
+        }, 0);
+        
+
+        box.addEventListener('scroll', () => {
+            updateIndicator(box, scrollList[index]);
+        });
+        box.addEventListener('click', () => {
+            updateIndicator(box, scrollList[index]);
+        });
+        i++;
+    });
+
+    //Add event listeners for opening or closing shop/inventory.
+    shopButton.addEventListener('click', () => {
+        setTimeout(() => {
+            updateIndicator(shopBox, shopScroll);
+            updateIndicator(inventoryBox, inventoryScroll);
+        },500);
+        
+    });
+
+    inventoryButton.addEventListener('click', () => {
+        setTimeout(() => {
+            updateIndicator(shopBox, shopScroll);
+            updateIndicator(inventoryBox, inventoryScroll);
+        },500);
+    });
+
+})();

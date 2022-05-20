@@ -47,6 +47,10 @@ May 18th, 2022
     As a quick aside, my task and project factory functions have been pretty stupid so far. Technically doesn't look that bad, but the way I've made the item factory I believe works basically the same in only three lines of code.
     Yeesh.
 
+May 19th, 2022
+
+    Tentatively calling today the last day. Only a couple bits of functionality to add, and then some cleanup with the effects. Also need to finish icon art. Basically just animations after that.
+
 
 ---To-Do---
 
@@ -75,8 +79,11 @@ DONE-Add character limit to project names
 -add animations/effects for finishing task and gifting
 -fix resolution on item icons
 -Highlight task value somehow
--add limit to points value
--reset gamedata button?
--Add arrow to show you can scroll
--local storage for hat location
--add scroll for overflowing tasks/projects
+DONE-add limit to points value
+-reset different date buttons?
+DONE-Add arrow to show you can scroll
+DONE-local storage for hat location
+DONE-add scroll for overflowing tasks/projects
+DONE-change default tasks
+DONE-message for cant afford things
+-Add tour project

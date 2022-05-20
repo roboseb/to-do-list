@@ -48,7 +48,15 @@ const projectInput = (() => {
             taskNames.push(task.getName());
         }); 
         if (taskNames.includes(addTaskName.value)) {
-            alert('Project already exists with that name.');
+            alert('Task already exists with that name.');
+            return;
+        }
+
+        if (addTaskValue.value > 100) {
+            alert("Value can't be greater than 100.");
+            return;
+        } else if (addTaskValue.value < 0) {
+            alert('Value can be empty or zero but not negative.');
             return;
         }
         

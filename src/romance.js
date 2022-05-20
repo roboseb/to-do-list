@@ -18,13 +18,21 @@ const Items = (() => {
     document.body.appendChild(descBox);
 
     //Create all items to add to shop and inventory.
-    const frog = Item('Frog Chapeau', 60, '/images/frog_icon.png', '/images/hat_frog.png', 'shop');
+    const frog = Item('Crapeau Chapeau', 60, '/images/frog_icon.png', '/images/hat_frog.png', 'shop');
     const tiara = Item('Ornate Tiara', 30, '/images/tiara_icon.png', '/images/hat_tiara.png', 'shop');
     const bow = Item('Beryl Bow', 25, '/images/bow_icon.png', '/images/hat_bow.png', 'shop');
-    
+    const aviators = Item('Luxury Aviators', 20, '/images/aviators_icon.png', '/images/hat_aviators.png', 'shop');
+    const retro = Item('Retro Shades', 20, '/images/retro_icon.png', '/images/hat_retro.png', 'shop');
+    const reflect = Item('Reflective Bifocals', 40, '/images/reflect_icon.png', '/images/hat_reflect.png', 'shop');
+    const blonde = Item('Pixie Cut', 60, '/images/blonde_icon.png', '/images/hat_blonde.png', 'shop');
+    const eye = Item('Eye of Behelit', 100, '/images/eye_icon.png', '/images/hat_eye.png', 'shop');
+    const cap = Item('Froggy Cap', 50, '/images/cap_icon.png', '/images/hat_cap.png', 'shop');
+    const witch = Item('Wiccan Hat', 120, '/images/witch_icon.png', '/images/hat_witch.png', 'shop');
+
+ 
 
     //Set item location if there is local storage for it.
-    if (localStorage['hat_Frog Chapeau']) {
+    if (localStorage['hat_Crapeau Chapeau']) {
 
         //Add back hat data from local storage.
         Object.keys(localStorage).forEach(key => {
@@ -36,7 +44,8 @@ const Items = (() => {
     } else {
 
         //Add all hats to itemList and local storage.
-        itemList.push(frog, tiara, bow);
+        itemList.push(frog, tiara, bow, aviators, retro, reflect,
+                        blonde, eye, cap, witch);
         itemList.forEach(item => {
             localStorage[`hat_${item.name}`] = JSON.stringify(item);
         });
@@ -65,6 +74,7 @@ const Items = (() => {
 
         //Buy item if in the shop, otherwise equip it.
         newItem.addEventListener('click', () => {
+            //Move item to inventory if can afford and in shop.
             if (TaskHandler.getPoints() >= item.value && item.location === 'shop') {
                 item.location = 'inventory';
                 newItem.className = 'item inventoryitem';
@@ -82,9 +92,25 @@ const Items = (() => {
                 //Update local storage for item location.
                 localStorage[`hat_${item.name}`] = JSON.stringify(item);
 
+            //Show an error if can't afford an item.
+            } else if (TaskHandler.getPoints() < item.value && item.location === 'shop') {
+                const errorBox = document.getElementById('errorbox');
+                
+                errorBox.style.display = 'block';
+                setTimeout(() => {
+                    errorBox.style.display = 'none';
+                }, 2000);
+
+
             } else if (item.location === 'inventory') {
                 const hatImage = document.getElementById('lorettahat');
-                hatImage.src = item.image;
+                
+                //Either equip or unequip item based on state.
+                if (hatImage.src.endsWith(item.image)) {
+                    hatImage.src = '';
+                } else {
+                    hatImage.src = item.image;
+                }
             }
         });
     }
