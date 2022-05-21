@@ -80,8 +80,8 @@ const TaskHandler = (() => {
 
         //Update points in local storage.
         localStorage['points'] = points;
-        if (change < 100 && change > -100) {
-            animateValue(pointsDisplay, prevPoints, points, Math.abs(change*100));
+        if (change < 60 && change > -60) {
+            animateValue(pointsDisplay, prevPoints, points, Math.abs(change*60));
         }
         
 
@@ -144,6 +144,9 @@ const TaskHandler = (() => {
             
 
             checkButton.addEventListener('click', () => {
+                //Play the task check animation.
+                taskEffect(checkButton);
+
                 if (task.getChecked()) {
                     newTask.remove();
                     task.setChecked(false);
@@ -180,6 +183,29 @@ const TaskHandler = (() => {
             });
             newTask.appendChild(checkButton);
             checkButton.appendChild(checkButtonDiv);
+        }
+
+        const taskEffect = (button) => {
+            //Create element and its box.
+            const effectBox = document.createElement('div');
+            effectBox.id = 'effectbox';
+            
+            const effect = document.createElement('div');
+            effect.classList.add('taskeffect');
+            effect.innerText = '₪';
+
+            //Set effect location based on box checked.
+            const target = button.getBoundingClientRect();
+            effectBox.style.top = `${target.top}px`;
+            effectBox.style.left = `${target.left}px`;
+
+            effectBox.appendChild(effect);
+            document.body.appendChild(effectBox);
+
+            //Remove effect after animation.
+            setTimeout(() => {
+                effectBox.remove();
+            }, 800);
         }
 
         const newTask = document.createElement('div');

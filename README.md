@@ -51,12 +51,20 @@ May 19th, 2022
 
     Tentatively calling today the last day. Only a couple bits of functionality to add, and then some cleanup with the effects. Also need to finish icon art. Basically just animations after that.
 
+May 20th, 2022
+
+    I keep finding little things that bug me. The project panel should be able to scroll. Wouldn't it be great if you could reset local data? Loretta really needs to be more dynamic. There need to be more little effects overall. Why is the custom cursor bugging out? There should be a default project that takes you on a tour of the site. Shouldn't Loretta have a win condition? All this little stuff adds up, and makes the site pretty cool, but means my estimates for developement time are always off. 
+
+    Been around a week and a half since I started, and yeah I missed a couple days. Still, a ton of time went into this. Not really sure how much time people are investing on average. Am I slow? Do my projects suffer from feature-creep? Regardless, I'm happy with my progress through TOP. Great, now I want to add mobile support with a media query. Great.
+
+    Looking at my first devlog, I expected this to be three or four day project. Ha.
+
 
 ---To-Do---
 
--Add loretta
--Add item shop
--Add currency counter
+DONE-Add loretta
+DONE-Add item shop
+DONE-Add currency counter
 DONE-Add task button
 CANCEL-Edit task button
 DONE-task projects
@@ -71,19 +79,24 @@ DONE-Differentiate priorities
 DONE-sort by priority
 DONE-Add local storage
 DONE-Add character limit to project names
--Add animations for loretta
--add currency counter and logic
--add item shop
--add inventory
+DONE-Add face changes for loretta
+DONE-add currency counter and logic
+DONE-add item shop
+DONE-add inventory
 -Add ending to Loretta path?
--add animations/effects for finishing task and gifting
--fix resolution on item icons
--Highlight task value somehow
+DONE-add animations/effects for finishing task and gifting
+DONE-fix resolution on item icons
+DONE-Highlight task value somehow
 DONE-add limit to points value
--reset different date buttons?
+DONE-reset different data buttons?
 DONE-Add arrow to show you can scroll
 DONE-local storage for hat location
 DONE-add scroll for overflowing tasks/projects
 DONE-change default tasks
 DONE-message for cant afford things
--Add tour project
+DONE-Add tour project
+DONE-Add animations for loretta
+-make project list scrollable
+-mobile support with media query/change grid setup
+-maintain order of projects when loading from local storage
+-fix wide hat bug

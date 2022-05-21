@@ -51,6 +51,26 @@ const Items = (() => {
         });
     }
 
+    //Add effects around Loretta when switching gear.
+    const hatEffect = (emoji) => {
+        const loretta = document.getElementById('loretta');
+        console.log('effect added');
+
+        //Create a heart effect.  
+        const effect = document.createElement('div');
+        effect.classList.add('hateffect');
+        effect.innerText = emoji;
+
+
+        loretta.appendChild(effect);
+
+
+        //Remove effect after animation.
+        setTimeout(() => {
+            effect.remove();
+        }, 800);
+    }
+
     //Display an item with its icon, name, value, and location.
     const display = (item) => {
         const newItem = document.createElement('div');
@@ -101,18 +121,44 @@ const Items = (() => {
                     errorBox.style.display = 'none';
                 }, 2000);
 
-
+            //Equip or unequip owned items.
             } else if (item.location === 'inventory') {
                 const hatImage = document.getElementById('lorettahat');
-                
-                //Either equip or unequip item based on state.
+
                 if (hatImage.src.endsWith(item.image)) {
                     hatImage.src = '';
                 } else {
                     hatImage.src = item.image;
+                    updateLoretta(item);
                 }
             }
         });
+
+        //Update Loretta's face based on equipped item.
+        const updateLoretta = (item) => {
+            //Initialize arrays for Loretta's preferences.
+            const upsetItems = [aviators.name, retro.name, reflect.name];
+            const happyItems = [witch.name, tiara.name, bow.name];
+            const shyItems = [frog.name, cap.name, blonde.name];
+
+            const loretta = document.getElementById('lorettamain');
+
+            //Change Loretta's expression based on equipped item.
+            if (upsetItems.includes(item.name)) {
+                loretta.src = '/images/lorettaupset.png';
+                hatEffect('💢');
+            } else if (happyItems.includes(item.name)) {
+                loretta.src = '/images/lorettahappy.png';
+                hatEffect('😊');
+            } else if (shyItems.includes(item.name)) {
+                loretta.src = '/images/lorettashy.png';
+                hatEffect('❤️');
+            } else {
+                loretta.src = '/images/lorettascary.png';
+                hatEffect('☠️');
+            }
+        }
+
     }
 
     //Display all items.

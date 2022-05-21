@@ -89,19 +89,25 @@ h2 {
     box-shadow: 0px 5px 7px grey;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
     transition: all 1s;
     padding: 15px;
     gap: 15px;
     margin-bottom: 10px;
     position: relative;
-}
-
-#sidebar {
     margin-left: 10px;
 }
 
-#sidebar>#projectpanel {
+#sidebar>#sidebarmain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s;
+    gap: 15px;
+    position: relative;
+}
+
+#projectpanel {
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 15px;
@@ -110,10 +116,22 @@ h2 {
     justify-items: end;
 }
 
-#sidebar>#projectpanel>button {
+#projectpanel>button {
     padding: 10px 13px;
     border-radius: 20px;
 }
+
+#sidebar>#resetpanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+#resetpanel>button:not(#openresetbtn) {
+    display: none;
+}
+
 
 #taskcontainer {
     display: flex;
@@ -249,6 +267,7 @@ button:not(.checkbtn):active {
     transition: all 0.4s;
     box-shadow: 0 9px #999;
     margin: 10px 10px 10px 0px;
+    position: relative;
 }
 
 .task.highpriority {
@@ -426,6 +445,7 @@ footer {
     height: 100%; 
     max-width: 200px;
     filter: drop-shadow(0 13px 10px grey);
+    position: relative;
 }
 
 #loretta>img#lorettahat {
@@ -611,4 +631,53 @@ footer {
 #inventorygrid>.indicator {
     filter: opacity(1);
     right: 15px;
+}
+
+.taskeffect {
+    color: white;
+    font-size: 3rem;
+    pointer-events: none;
+    font-weight: bold;
+    background-color: rgba(255, 230, 0, 0.5);
+    padding: 5px 12px 5px 12px;
+    border-radius: 100%;
+}
+
+#effectbox {
+    background-color: orangered;
+    position: fixed;
+    border-radius: 100%;
+    animation: taskeffect 0.8s linear 0s infinite none;
+    filter: drop-shadow(5px 5px 0 rgb(136, 83, 14));
+    pointer-events: none;
+}
+
+.hateffect {
+    position: absolute;
+    animation: hateffect 0.8s linear 0s 1 none;
+    pointer-events: none; 
+    top: 0;
+    left: 0;
+    color: red;
+    font-size: 3rem;
+}
+
+
+
+@keyframes taskeffect
+{
+  0% { transform: translate(0rem, 0rem) rotate(0deg); animation-timing-function: cubic-bezier(0.33333, 0.66667, 0.66667, 1);}
+
+  69.0983% { transform: translate(3rem, -6rem) rotate(180deg); animation-timing-function: cubic-bezier(0.33333, 0, 0.66667, 0.33333);}
+
+  100% { transform: translate(7rem, 0rem) rotate(270deg);}
+}
+
+@keyframes hateffect
+{
+  0% { transform: translate(0rem, 0rem) rotate(0deg); animation-timing-function: cubic-bezier(0.33333, 0.66667, 0.66667, 1);}
+
+  69.0983% { transform: translate(-3rem, -6rem) rotate(180deg); animation-timing-function: cubic-bezier(0.33333, 0, 0.66667, 0.33333);}
+
+  100% { transform: translate(-7rem, 0rem) rotate(270deg);}
 }
