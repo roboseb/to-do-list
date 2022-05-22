@@ -10,7 +10,11 @@ html {
 body {
     margin: 0;
     font-family: 'Josefin Sans', sans-serif;
-    cursor: url('/src/images/cursormain.png'), auto;
+    cursor: url('/dist/images/cursormain.png'), auto;
+}
+
+label {
+    cursor: url('/dist/images/cursormain.png'), auto; 
 }
 
 .mainclicked:not(button) {
@@ -18,8 +22,12 @@ body {
     animation-iteration-count: infinite;
 }
 
+.inventoryitem>img{
+    cursor: url('/dist/images/cursorgift.png'), auto;
+}
+
 button, input{
-    cursor: url('/src/images/cursorlink.png'), auto;
+    cursor: url('/dist/images/cursorlink.png'), auto;
     font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -29,13 +37,13 @@ button:active, input:active{
 }
 
 @keyframes linkclick {
-    from {cursor: url('/src/images/cursorlinkdown.png'), auto;}
-    to {cursor: url('/src/images/cursorlink.png'), auto;}
+    from {cursor: url('/dist/images/cursorlinkdown.png'), auto;}
+    to {cursor: url('/dist/images/cursorlink.png'), auto;}
 }
 
 @keyframes mainclick {
-    from {cursor: url('/src/images/cursormaindown.png'), auto;}
-    to {cursor: url('/src/images/cursormain.png'), auto;}
+    from {cursor: url('/dist/images/cursormaindown.png'), auto;}
+    to {cursor: url('/dist/images/cursormain.png'), auto;}
 }
 
 h2 {
@@ -54,6 +62,7 @@ h2 {
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 6fr;
     gap: 10px;
+    overflow-x: hidden;
 }
 
 @media only screen and (min-width: 1200px) {

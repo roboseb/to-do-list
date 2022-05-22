@@ -3,6 +3,35 @@ To-Do List project for the Odin Project.
 
 --Features---
 
+    -A do to list app with projects to sort your tasks
+
+    -Many task options like description, priority, due date, and value
+
+    -Responsive desktop layout, no mobile support :(
+    
+    -Local data storage for tasks and romance
+
+    -Delete local data separately for romance, points and tasks
+
+    -Expand tasks for more details
+
+    -Romance! Date loretta by completing tasks and getting points
+
+    -Use these points to buy Loretta hats in the store
+
+    -Point data and inventory saved in local storage
+
+    -Hover over items to see their name and cost
+
+    -Watch Loretta's reaction to see which hats she likes!
+
+    -Two types of animated buttons, for toggle buttons and the others
+    
+    -Animated checkboxes, point changes, and task opening.
+
+    -Coin animation for checking a task off
+
+    -Emoji animation for equipping Loretta with a hat
 
 ---Devlog---
 
@@ -59,6 +88,18 @@ May 20th, 2022
 
     Looking at my first devlog, I expected this to be three or four day project. Ha.
 
+May 21st, 2022
+
+    Running into issues on minor updates, so time to start cancelling things. Fixing the styling on scolling the tasks proved problematic, so scrap that. Somehow scrolling projects proved even more troublesome, so scrap that. So many of these features break when you have an element scroll instead of the page. The task scrolling indicator was tied to the sidebar, since the task container itself can scroll, so it needed something solid to base its location on. Messing with the overflow on projects breaks the indicator, so again, scrap that. Technically it's only relevant with more than 8 projects, so not the biggest deal. I have to move on someday.
+
+    Only two things left to try. Adding mobile formatting, and then fixing the cursor bug. I have a feeling that the former will be far more difficult. Here we go anyway.
+
+    Adding mobile support sucks. Something something mobile first design. Too many pieces to add it in now. Or at least with the amount of extra time I want to spend on this. Cursor should be easy, I'll either fix it quickly by changing the resolution or something else, or I'll scrap it and have default cursors.
+
+    Changed the cursors to 32x32px, fixed the issue. MDN says larger resolutions than that should just break the custom cursor, but it half worked for some reason. whatever, it's done and I got to keep the cool hands.
+
+    In my head I though I had spent about 40 hours on this project, but it's closer to 60. Christ. Is the end result worth the time spent? You be the judge.
+
 
 ---To-Do---
 
@@ -68,12 +109,12 @@ DONE-Add currency counter
 DONE-Add task button
 CANCEL-Edit task button
 DONE-task projects
--animate opening and closing tasks
+CANCEL-animate opening and closing tasks
 CANCEL-show a project is empty with a message
 DONE-remove task button
 DONE-remove project button
 DONE-Custom font
--fix cursor bugs
+DONE-fix cursor bugs
 DONE-customize radio buttons
 DONE-Differentiate priorities
 DONE-sort by priority
@@ -83,7 +124,7 @@ DONE-Add face changes for loretta
 DONE-add currency counter and logic
 DONE-add item shop
 DONE-add inventory
--Add ending to Loretta path?
+CANCEL-Add ending to Loretta path?
 DONE-add animations/effects for finishing task and gifting
 DONE-fix resolution on item icons
 DONE-Highlight task value somehow
@@ -96,7 +137,7 @@ DONE-change default tasks
 DONE-message for cant afford things
 DONE-Add tour project
 DONE-Add animations for loretta
--make project list scrollable
--mobile support with media query/change grid setup
--maintain order of projects when loading from local storage
--fix wide hat bug
+CANCEL-make project list scrollable
+CANCEL-mobile support with media query/change grid setup
+CANCEL-maintain order of projects when loading from local storage
+DONE-fix wide hat bug

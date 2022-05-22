@@ -31,8 +31,6 @@ const newProject = Project('New Project');
 const tour = Project('Site tour');
 
 
-
-
 //Create default projects and tasks if page has not been visited.
 if (!localStorage['pagevisited']) {
     localStorage['pagevisited'] = true;
@@ -66,10 +64,6 @@ for (let i = 0; i < Object.keys(projectList).length; i++) {
     console.log(Object.keys(projectList)[i]);
     
     TaskHandler.displayProject(projectList[Object.keys(projectList)[i]]);
-    
-
-    // console.log(projectList[proj]);
-    // console.log(projectList[proj].getTitle());
 }
 
 
@@ -108,11 +102,24 @@ if (localStorage['points'] !== undefined) {
 document.addEventListener('mousedown', () => {
     const container = document.getElementById('container');
     container.classList.add('mainclicked');
-})
+});
 document.addEventListener('mouseup', () => {
     const container = document.getElementById('container');
     container.classList.remove('mainclicked');
 });
+
+//Animate clicking regular cursor on input labels. 
+//Why does this need its on section? Go ask John CSS.
+const labels  = Array.from(document.querySelectorAll('label'));
+labels.forEach(label => {
+    label.addEventListener('mousedown', () => {
+        label.classList.add('mainclicked');
+    });
+    label.addEventListener('mouseup', () => {
+        label.classList.remove('mainclicked');
+    });
+})
+
 
 //Add functionality to reset buttons.
 const Reset = (() => {
