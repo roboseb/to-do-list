@@ -18,16 +18,16 @@ const Items = (() => {
     document.body.appendChild(descBox);
 
     //Create all items to add to shop and inventory.
-    const frog = Item('Crapeau Chapeau', 60, '/images/frog_icon.png', '/images/hat_frog.png', 'shop');
-    const tiara = Item('Ornate Tiara', 30, '/images/tiara_icon.png', '/images/hat_tiara.png', 'shop');
-    const bow = Item('Beryl Bow', 25, '/images/bow_icon.png', '/images/hat_bow.png', 'shop');
-    const aviators = Item('Luxury Aviators', 20, '/images/aviators_icon.png', '/images/hat_aviators.png', 'shop');
-    const retro = Item('Retro Shades', 20, '/images/retro_icon.png', '/images/hat_retro.png', 'shop');
-    const reflect = Item('Reflective Bifocals', 40, '/images/reflect_icon.png', '/images/hat_reflect.png', 'shop');
-    const blonde = Item('Pixie Cut', 60, '/images/blonde_icon.png', '/images/hat_blonde.png', 'shop');
-    const eye = Item('Eye of Behelit', 100, '/images/eye_icon.png', '/images/hat_eye.png', 'shop');
-    const cap = Item('Froggy Cap', 50, '/images/cap_icon.png', '/images/hat_cap.png', 'shop');
-    const witch = Item('Wiccan Hat', 120, '/images/witch_icon.png', '/images/hat_witch.png', 'shop');
+    const frog = Item('Crapeau Chapeau', 60, require('/src/images/frog_icon.png'), require('/src/images/hat_frog.png'), 'shop');
+    const tiara = Item('Ornate Tiara', 30, require('../src/images/tiara_icon.png'), require('../src/images/hat_tiara.png'), 'shop');
+    const bow = Item('Beryl Bow', 25, require('../src/images/bow_icon.png'), require('../src/images/hat_bow.png'), 'shop');
+    const aviators = Item('Luxury Aviators', 20, require('../src/images/aviators_icon.png'), require('../src/images/hat_aviators.png'), 'shop');
+    const retro = Item('Retro Shades', 20, require('../src/images/retro_icon.png'), require('../src/images/hat_retro.png'), 'shop');
+    const reflect = Item('Reflective Bifocals', 40, require('../src/images/reflect_icon.png'), require('../src/images/hat_reflect.png'), 'shop');
+    const blonde = Item('Pixie Cut', 60, require('../src/images/blonde_icon.png'), require('../src/images/hat_blonde.png'), 'shop');
+    const eye = Item('Eye of Behelit', 100, require('../src/images/eye_icon.png'), require('../src/images/hat_eye.png'), 'shop');
+    const cap = Item('Froggy Cap', 50, require('../src/images/cap_icon.png'), require('../src/images/hat_cap.png'), 'shop');
+    const witch = Item('Wiccan Hat', 120, require('../src/images/witch_icon.png'), require('../src/images/hat_witch.png'), 'shop');
 
  
 
@@ -145,16 +145,16 @@ const Items = (() => {
 
             //Change Loretta's expression based on equipped item.
             if (upsetItems.includes(item.name)) {
-                loretta.src = '/images/lorettaupset.png';
+                loretta.src = require('../src/images/lorettaupset.png');
                 hatEffect('💢');
             } else if (happyItems.includes(item.name)) {
-                loretta.src = '/images/lorettahappy.png';
+                loretta.src = require('../src/images/lorettahappy.png');
                 hatEffect('😊');
             } else if (shyItems.includes(item.name)) {
-                loretta.src = '/images/lorettashy.png';
+                loretta.src = require('../src/images/lorettashy.png');
                 hatEffect('❤️');
             } else {
-                loretta.src = '/images/lorettascary.png';
+                loretta.src = require('../src/images/lorettascary.png');
                 hatEffect('☠️');
             }
         }
